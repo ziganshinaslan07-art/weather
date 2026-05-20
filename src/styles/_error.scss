@@ -1,0 +1,25 @@
+
+
+@use 'utils' as *;
+
+.error-popup {
+  position: fixed;
+  top: rem(-100);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  z-index: 1000;
+  background-color: #FF9999;
+  border: 1px solid #FF3333;
+  color: var(--color-white);
+  border-radius: rem(8);
+  padding-inline: rem(10);
+
+  transition: all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  opacity: 0;
+}
+
+.error-popup.active {
+  top: rem(20);
+  opacity: 1;
+}

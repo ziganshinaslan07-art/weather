@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./src/main.js" defer type="module"></script>
+    <title>Weather Web</title>
+</head>
+<body>
+    <div class="error-popup">
+        <div class="error-popup-message"></div>
+    </div>
+    <header class="header">
+        <form class="header__container">
+            <label for="search" class="visually-hidden">Search</label>
+            <input name="location" type="text" class="header__search" id="search" placeholder="Search Location...">
+            <button class="header__button" type="button" id="search-button" title="Search">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_129_5344)">
+                        <path d="M19.3846 11.8462C19.3846 9.77083 18.647 7.99559 17.1719 6.52043C15.6967 5.04527 13.9215 4.30769 11.8462 4.30769C9.77083 4.30769 7.99559 5.04527 6.52043 6.52043C5.04527 7.99559 4.30769 9.77083 4.30769 11.8462C4.30769 13.9215 5.04527 15.6967 6.52043 17.1719C7.99559 18.647 9.77083 19.3846 11.8462 19.3846C13.9215 19.3846 15.6967 18.647 17.1719 17.1719C18.647 15.6967 19.3846 13.9215 19.3846 11.8462ZM28 25.8462C28 26.4295 27.7869 26.9343 27.3606 27.3606C26.9343 27.7869 26.4295 28 25.8462 28C25.2404 28 24.7356 27.7869 24.3317 27.3606L18.5601 21.6058C16.5521 22.9968 14.3141 23.6923 11.8462 23.6923C10.242 23.6923 8.70793 23.381 7.24399 22.7584C5.78005 22.1358 4.51803 21.2945 3.45793 20.2344C2.39784 19.1743 1.55649 17.9123 0.933894 16.4483C0.311298 14.9844 0 13.4503 0 11.8462C0 10.242 0.311298 8.70793 0.933894 7.24399C1.55649 5.78005 2.39784 4.51803 3.45793 3.45793C4.51803 2.39784 5.78005 1.55649 7.24399 0.933894C8.70793 0.311298 10.242 0 11.8462 0C13.4503 0 14.9844 0.311298 16.4483 0.933894C17.9123 1.55649 19.1743 2.39784 20.2344 3.45793C21.2945 4.51803 22.1358 5.78005 22.7584 7.24399C23.381 8.70793 23.6923 10.242 23.6923 11.8462C23.6923 14.3141 22.9968 16.5521 21.6058 18.5601L27.3774 24.3317C27.7925 24.7468 28 25.2516 28 25.8462Z" fill="white"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_129_5344">
+                            <rect width="28" height="28" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </button>
+            <button class="header__button" type="button" id="navigation-button" title="Current Location">
+                <svg fill="#FFFFFF" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                     width="30" height="30" viewBox="0 0 930.000000 1280.000000"
+                     preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" stroke="none">
+                        <path d="M4335 12789 c-1496 -104 -2843 -915 -3635 -2190 -232 -373 -414 -787
+                        -529 -1204 -305 -1107 -197 -2278 305 -3295 191 -387 372 -660 676 -1020 34
+                        -41 753 -976 1596 -2077 918 -1199 1555 -2022 1588 -2052 186 -170 442 -170
+                        628 0 33 30 670 853 1588 2052 843 1101 1562 2036 1596 2077 304 360 485 633
+                        676 1020 566 1147 629 2502 174 3695 -353 923 -967 1689 -1798 2242 -825 549
+                        -1864 821 -2865 752z m559 -2254 c224 -29 398 -81 601 -180 553 -268 931 -756
+                        1062 -1374 25 -116 27 -145 28 -366 0 -267 -10 -345 -70 -555 -161 -561 -586
+                        -1032 -1130 -1253 -201 -82 -365 -120 -592 -139 -294 -25 -593 23 -878 139
+                        -544 221 -969 692 -1130 1253 -60 210 -70 288 -70 555 1 221 3 250 28 366 112
+                        527 406 965 842 1252 177 116 437 227 637 271 209 46 467 58 672 31z"/>
+                    </g>
+                </svg>
+            </button>
+        </form>
+    </header>
+    <main class="main">
+        <div class="meeting">
+            Enter a location...
+        </div>
+        <div class="main__card" style="display: none">
+            <div class="card__location">
+
+            </div>
+            <div class="card__time">
+            </div>
+            <div class="card__icon-container">
+            </div>
+            <div class="card__description">
+                Enter a location...
+            </div>
+            <ul class="card__forecast">
+                <li class="minicard minicard--forecast card__forecast-1">
+
+                </li>
+                <li class="minicard minicard--forecast card__forecast-2">
+
+                </li>
+                <li class="minicard minicard--forecast card__forecast-3">
+
+                </li>
+                <li class="minicard minicard--forecast card__forecast-4">
+
+                </li>
+                <li class="minicard minicard--forecast card__forecast-5">
+
+                </li>
+                <li class="minicard minicard--forecast card__forecast-6">
+
+                </li>
+                <li class="minicard minicard--forecast card__forecast-7">
+
+                </li>
+            </ul>
+            <div class="card__supporting-information">
+                <div class="minicard card__supporting-information-wind">
+
+                </div>
+                <div class="minicard card__supporting-information-feels-like">
+
+                </div>
+                <div class="minicard card__supporting-information-humidity">
+
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

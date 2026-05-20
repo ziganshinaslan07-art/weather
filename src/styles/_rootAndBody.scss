@@ -1,0 +1,21 @@
+body {
+  font-family: var(--font-family-base), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--color-white);
+  background-color: var(--color-dark-alternate);
+  white-space: nowrap;
+}
+
+:root {
+  --color-white: #fff;
+  --color-dark-alternate: #131619;
+  --color-light-gray: #C4C4C4;
+
+  --font-family-base: 'Roboto', sans-serif;
+
+  --grey-gradient: linear-gradient(#B2BEC3, #636E72);
+
+  --black-opacity: rgba(0, 0, 0, 0.1)
+}

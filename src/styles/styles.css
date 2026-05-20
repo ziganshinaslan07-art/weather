@@ -1,0 +1,430 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure, fieldset):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+  /**
+    Плавный скролл
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
+ */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill=none],
+[fill^=url])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none],
+[stroke^=url])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  font-family: var(--font-family-base), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--color-white);
+  background-color: var(--color-dark-alternate);
+  white-space: nowrap;
+}
+
+:root {
+  --color-white: #fff;
+  --color-dark-alternate: #131619;
+  --color-light-gray: #C4C4C4;
+  --font-family-base: 'Roboto', sans-serif;
+  --grey-gradient: linear-gradient(#B2BEC3, #636E72);
+  --black-opacity: rgba(0, 0, 0, 0.1) ;
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Roboto-Regular.woff2");
+  font-display: swap;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+.minicard {
+  width: max(14.2857142857%, 75px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.minicard--forecast {
+  padding-block: 0.4375rem;
+  line-height: 1.35;
+}
+
+.current {
+  background-color: var(--black-opacity);
+}
+
+.error-popup {
+  position: fixed;
+  top: -6.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  z-index: 1000;
+  background-color: #FF9999;
+  border: 1px solid #FF3333;
+  color: var(--color-white);
+  border-radius: 0.5rem;
+  padding-inline: 0.625rem;
+  transition: all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  opacity: 0;
+}
+
+.error-popup.active {
+  top: 1.25rem;
+  opacity: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  box-shadow: 0 0.625rem 0.625rem #000;
+  padding-block: 15px;
+  margin-bottom: 0.9375rem;
+}
+.header__container {
+  width: 31.25rem;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 0.625rem;
+  padding-bottom: 0.3125rem;
+  border-bottom: 1px solid var(--color-white);
+}
+.header__search {
+  border: none;
+  background-color: transparent;
+  color: var(--color-white);
+  width: 100%;
+}
+.header__search:focus {
+  outline: none;
+}
+.header__button {
+  background-color: transparent;
+  cursor: default;
+  border: none;
+  color: var(--color-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__button:hover {
+  color: var(--color-light-gray);
+}
+
+.disabled {
+  color: var(--color-light-gray);
+}
+
+.meeting {
+  font-size: 3.75rem;
+}
+
+.main {
+  font-size: 1.25rem;
+  min-height: calc(100vh - 8.125rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__card {
+  margin-inline: 0.9375rem;
+  height: calc(100vh - 79.5px - 1.25rem);
+  border-radius: 1.875rem;
+  width: 625px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: var(--grey-gradient);
+}
+
+.card__location {
+  padding-block: 0.625rem;
+  padding-inline: 1.875rem;
+  background-color: var(--black-opacity);
+  border-radius: 0 0 0.9375rem 0.9375rem;
+  text-wrap: wrap;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.card__time {
+  margin-bottom: 5.625rem;
+}
+
+.card__icon-container {
+  margin-bottom: 1.875rem;
+  width: 12.5rem;
+}
+
+.card__description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  margin-bottom: 2.5rem;
+}
+.card__description-weather {
+  font-size: 3.125rem;
+  margin-bottom: 0.625rem;
+  text-wrap: wrap;
+  text-align: center;
+}
+.card__description-degree {
+  font-size: 2.5rem;
+  margin-bottom: 0.9375rem;
+}
+
+.card__forecast {
+  background-color: var(--black-opacity);
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: auto;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  row-gap: 0.625rem;
+}
+.card__forecast-icon {
+  width: 3.75rem;
+}
+
+.card__supporting-information {
+  background-color: var(--black-opacity);
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding-block: 1.25rem;
+  border-top: 2px solid var(--black-opacity);
+}
+.card__supporting-information p {
+  line-height: 1.5;
+}
+
+@media (max-width: 575px), (max-height: 950px) {
+  .meeting {
+    font-size: 1.875rem;
+  }
+  .header {
+    margin-bottom: 0;
+  }
+  .header__container {
+    margin-inline: 0.9375rem;
+  }
+  .main__card {
+    margin-inline: auto;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    min-height: calc(100vh - 69.5px);
+  }
+  .card__forecast {
+    justify-content: space-evenly;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
