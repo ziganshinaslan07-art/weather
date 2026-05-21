@@ -9,7 +9,7 @@
     margin-inline: rem(15);
     height: calc(100vh - 79.5px - rem(20));
     border-radius: rem(30);
-    width: 625px;
+    width: min(625px, 100vw);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -60,12 +60,20 @@
   background-color: var(--black-opacity);
   font-size: rem(14);
   display: flex;
-  justify-content: space-evenly;
+  overflow-x: scroll;
+  white-space: nowrap;
   width: 100%;
   margin-top: auto;
-  flex-wrap: wrap;
   flex-shrink: 0;
   row-gap: rem(10);
+  scroll-behavior: smooth;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &-icon {
     width: rem(60);

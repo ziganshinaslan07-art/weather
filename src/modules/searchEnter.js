@@ -12,7 +12,7 @@ export function searchEnter() {
         if (event.key === 'Enter') {
             event.preventDefault()
             const formData = new FormData(form);
-            const location_API = `http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=${formData.get('location')}&days=7`
+            const location_API = `http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=${formData.get('location')}&days=14`
 
             requestFetch(location_API, searchButton, navigationButton, searchInput)
         }

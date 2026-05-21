@@ -16,7 +16,7 @@
         <form class="header__container">
             <label for="search" class="visually-hidden">Search</label>
             <input name="location" type="text" class="header__search" id="search" placeholder="Search Location...">
-            <button class="header__button" type="button" id="search-button" title="Search">
+            <button type="button" id="search-button" title="Search">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_129_5344)">
                         <path d="M19.3846 11.8462C19.3846 9.77083 18.647 7.99559 17.1719 6.52043C15.6967 5.04527 13.9215 4.30769 11.8462 4.30769C9.77083 4.30769 7.99559 5.04527 6.52043 6.52043C5.04527 7.99559 4.30769 9.77083 4.30769 11.8462C4.30769 13.9215 5.04527 15.6967 6.52043 17.1719C7.99559 18.647 9.77083 19.3846 11.8462 19.3846C13.9215 19.3846 15.6967 18.647 17.1719 17.1719C18.647 15.6967 19.3846 13.9215 19.3846 11.8462ZM28 25.8462C28 26.4295 27.7869 26.9343 27.3606 27.3606C26.9343 27.7869 26.4295 28 25.8462 28C25.2404 28 24.7356 27.7869 24.3317 27.3606L18.5601 21.6058C16.5521 22.9968 14.3141 23.6923 11.8462 23.6923C10.242 23.6923 8.70793 23.381 7.24399 22.7584C5.78005 22.1358 4.51803 21.2945 3.45793 20.2344C2.39784 19.1743 1.55649 17.9123 0.933894 16.4483C0.311298 14.9844 0 13.4503 0 11.8462C0 10.242 0.311298 8.70793 0.933894 7.24399C1.55649 5.78005 2.39784 4.51803 3.45793 3.45793C4.51803 2.39784 5.78005 1.55649 7.24399 0.933894C8.70793 0.311298 10.242 0 11.8462 0C13.4503 0 14.9844 0.311298 16.4483 0.933894C17.9123 1.55649 19.1743 2.39784 20.2344 3.45793C21.2945 4.51803 22.1358 5.78005 22.7584 7.24399C23.381 8.70793 23.6923 10.242 23.6923 11.8462C23.6923 14.3141 22.9968 16.5521 21.6058 18.5601L27.3774 24.3317C27.7925 24.7468 28 25.2516 28 25.8462Z" fill="white"/>
@@ -28,7 +28,7 @@
                     </defs>
                 </svg>
             </button>
-            <button class="header__button" type="button" id="navigation-button" title="Current Location">
+            <button type="button" id="navigation-button" title="Current Location">
                 <svg fill="#FFFFFF" version="1.0" xmlns="http://www.w3.org/2000/svg"
                      width="30" height="30" viewBox="0 0 930.000000 1280.000000"
                      preserveAspectRatio="xMidYMid meet">
@@ -52,7 +52,7 @@
         <div class="meeting">
             Enter a location...
         </div>
-        <div class="main__card" style="display: none">
+        <div class="main__card" id="main__card" style="display: none">
             <div class="card__location">
 
             </div>
@@ -64,26 +64,75 @@
                 Enter a location...
             </div>
             <ul class="card__forecast">
-                <li class="minicard minicard--forecast card__forecast-1">
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-1">
 
+                    </button>
                 </li>
-                <li class="minicard minicard--forecast card__forecast-2">
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-2">
 
+                    </button>
                 </li>
-                <li class="minicard minicard--forecast card__forecast-3">
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-3">
 
+                    </button>
                 </li>
-                <li class="minicard minicard--forecast card__forecast-4">
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-4">
 
+                    </button>
                 </li>
-                <li class="minicard minicard--forecast card__forecast-5">
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-5">
 
+                    </button>
                 </li>
-                <li class="minicard minicard--forecast card__forecast-6">
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-6">
 
+                    </button>
                 </li>
-                <li class="minicard minicard--forecast card__forecast-7">
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-7">
 
+                    </button>
+                </li>
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-8">
+
+                    </button>
+                </li>
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-9">
+
+                    </button>
+                </li>
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-10">
+
+                    </button>
+                </li>
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-11">
+
+                    </button>
+                </li>
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-12">
+
+                    </button>
+                </li>
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-13">
+
+                    </button>
+                </li>
+                <li>
+                    <button class="minicard minicard--forecast card__forecast-14">
+
+                    </button>
                 </li>
             </ul>
             <div class="card__supporting-information">
@@ -97,6 +146,9 @@
 
                 </div>
             </div>
+        </div>
+        <div class="main__card main__card--extra" style="display: none">
+
         </div>
     </main>
 </body>

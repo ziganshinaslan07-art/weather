@@ -6,27 +6,37 @@ function setLocation(data) {
     `
 }
 
+let weatherTimeInterval = null
+
 function setTime(data) {
     const cardTime = document.querySelector('.card__time');
     const timeZone = data.location.tz_id
 
+    if (weatherTimeInterval) {
+        clearInterval(weatherTimeInterval);
+    }
+
     function updateTime() {
+        const now = new Date()
+
+        const time = now.toLocaleTimeString('ru-RU', {
+            timeZone: timeZone,
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+
+        const date = now.toLocaleDateString('en-US', {
+            timeZone: timeZone,
+            day: 'numeric',
+            month: 'short',
+        })
+
         cardTime.innerHTML = `
-            <p>${new Date().toLocaleTimeString('ru-RU', {
-                    timeZone: timeZone,
-                    hour: '2-digit',
-                    minute: '2-digit'
-                })},
-            ${new Date().toLocaleDateString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric',
-                    timeZone: timeZone 
-                })}
-            </p>
+            <p>${time}, ${date}</p>
         `
     }
 
-    setInterval(updateTime, 30000);
+    weatherTimeInterval = setInterval(updateTime, 30000);
 
     updateTime()
 }
@@ -35,7 +45,7 @@ function setIcon(data) {
     const iconContainer = document. querySelector('.card__icon-container');
     const textIcon = data.current.condition.code;
     const textAPI = data.current.condition.text
-    let link = (data.current.is_day) ? `./src/assets/icons/day/${textIcon}.svg` : `./src/assets/icons/night/${textIcon}.svg`
+    let link = (data.current.is_day) ? `./icons/day/${textIcon}.svg` : `./icons/night/${textIcon}.svg`
 
     iconContainer.innerHTML = `
         <img
@@ -68,6 +78,10 @@ function setDescription(data) {
 
 function setForecast(data) {
     const cardForecastList = document.querySelectorAll('.minicard--forecast');
+    const currentElement = document.querySelector('.current')
+    if (currentElement) {
+        currentElement.classList.remove('current')
+    }
 
     cardForecastList[0].classList.add('current');
 
@@ -86,7 +100,7 @@ function setForecast(data) {
 
         const textIcon = day.day.condition.text;
         const dayTemperature = day.day.avgtemp_c;
-        let link = `./src/assets/icons/day/${day.day.condition.code}.svg`;
+        let link = `./icons/day/${day.day.condition.code}.svg`;
 
         cardForecastList[i].innerHTML = `
             <p class="card__forecast-${i+1}-name">${dayName},</p>

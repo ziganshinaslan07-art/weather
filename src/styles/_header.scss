@@ -27,17 +27,7 @@
     }
   }
 
-  &__button {
-    background-color: transparent;
-    cursor: default;
-    border: none;
-    color: var(--color-white);
-    @include flex-center;
 
-    &:hover {
-      color: var(--color-light-gray)
-    }
-  }
 }
 
 .disabled {

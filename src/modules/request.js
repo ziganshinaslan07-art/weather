@@ -18,11 +18,11 @@ function request(event, form) {
 
     if (button.id === 'search-button') {
         const formData = new FormData(form);
-        location_API = `http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=${formData.get('location')}&days=7`
+        location_API = `http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=${formData.get('location')}&days=14`
     }
 
     if (button.id === 'navigation-button') {
-        location_API = 'http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=auto:ip&days=7'
+        location_API = 'http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=auto:ip&days=14'
     }
 
     inputElement.disabled = true
@@ -66,6 +66,12 @@ function requestFetch(location_API, searchButton, navigationButton, inputElement
             }
         })
         .finally(() => {
+            const mainCard = document.querySelector("#main__card")
+            const mainCardExtra = document.querySelector(".main__card--extra")
+
+            mainCard.style.display = 'flex'
+            mainCardExtra.style.display = 'none'
+
             searchButton.disabled = false;
             searchButton.classList.remove('disabled');
             navigationButton.disabled = false;
