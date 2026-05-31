@@ -2,7 +2,7 @@ import {fetchWeather} from "./request.js";
 import {animation} from "./animation.js";
 
 const API_KEY = '01890537221a47ba8c8195027262405';
-const API_BASE = 'http://api.weatherapi.com/v1/forecast.json';
+const API_BASE = 'https://api.weatherapi.com/v1/forecast.json';
 const FORECAST_DAYS = 14;
 
 export function initSearch() {
