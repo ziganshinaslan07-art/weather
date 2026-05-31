@@ -1,21 +1,49 @@
+@use 'fonts' as *;
+
 body {
   font-family: var(--font-family-base), sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.75;
   color: var(--color-white);
-  background-color: var(--color-dark-alternate);
+  background-image: url('/public/background/pattern.svg');
   white-space: nowrap;
 }
 
 :root {
-  --color-white: #fff;
-  --color-dark-alternate: #131619;
-  --color-light-gray: #C4C4C4;
+  --color-white: #ffffff;
+  --color-light-gray: #d7d7d7;
 
-  --font-family-base: 'Roboto', sans-serif;
+  --font-family-base: josefin-sans, sans-serif;
 
-  --grey-gradient: linear-gradient(#B2BEC3, #636E72);
+  --theme-gradient: linear-gradient(#acc38b, #778f51, #456c35);
 
-  --black-opacity: rgba(0, 0, 0, 0.1)
+  --black-opacity: rgba(0, 0, 0, 0.1);
+  --blackX2-opacity: rgba(0, 0, 0, 0.2);
 }
+
+:root[data-theme="default"] {
+  --theme-gradient: #282e33;
+  --color-dark-alternate: #131619;
+}
+
+:root[data-theme="forest"] {
+  --theme-gradient: linear-gradient(#acc38b 0%, #778f51 40%, #456c35 100%);
+  --color-dark-alternate: #131619;
+}
+
+:root[data-theme="sakura"] {
+  --theme-gradient: linear-gradient(#d7c1d5 0%, #e0acbe 40%, #bd787d 100%);
+  --color-dark-alternate: #131619;
+}
+
+:root[data-theme="orange"] {
+  --theme-gradient: linear-gradient(#a5c6b1 0%, #f4c88c 85%, #cc883e 100%);
+  --color-dark-alternate: #131619;
+}
+
+:root[data-theme="ocean"] {
+  --theme-gradient: linear-gradient(#9cb9d1 0%, #759cd8 55%, #094d74 100%);
+  --color-dark-alternate: #131619;
+}
+

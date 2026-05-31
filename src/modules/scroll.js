@@ -1,8 +1,13 @@
-export function scroll() {
-    const scrollContainer = document.querySelector('.card__forecast');
+export function initForecastScroll() {
+    const forecastElementDay = document.getElementById('cardDays');
+    const forecastElementHour = document.getElementById('cardHours');
 
-    scrollContainer.addEventListener('wheel', (event) => {
+    forecastElementDay.addEventListener('wheel', (event) => {
         event.preventDefault();
-        scrollContainer.scrollLeft += event.deltaY;
+        forecastElementDay.scrollLeft += event.deltaY * 1.5;
+    });
+    forecastElementHour.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        forecastElementHour.scrollLeft += event.deltaY * 2.5;
     });
 }

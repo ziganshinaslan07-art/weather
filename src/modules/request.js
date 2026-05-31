@@ -1,85 +1,75 @@
-import {CustomError} from "./error.js";
-import {setLocation, setTime, setDescription, setForecast, setSupportingInformation, setIcon} from "./setValues.js";
+import {errorPopup} from "./error.js";
+import {renderLocation, renderClock, renderDescription, renderForecast, renderSupportingInformation, renderWeatherIcon} from "./setValues.js";
+import { initForecastDayClick, initForecastHourClick } from "./extra.js"
 
-function request(event, form) {
-    const button = event.target.closest('button');
-    if (!button || button.disabled) return
+function setControlsDisabled(disabled) {
+    const searchButton = document.getElementById('search-button')
+    const navigationButton = document.getElementById('navigation-button')
+    const searchInput = document.querySelector('.header__search')
 
-    const searchButton = document.getElementById('search-button');
-    const navigationButton = document.getElementById('navigation-button');
-    const inputElement = document.querySelector('.header__search');
+    searchButton.disabled = disabled
+    navigationButton.disabled = disabled
+    searchButton.classList.toggle('disabled', disabled)
+    navigationButton.classList.toggle('disabled', disabled)
 
-    searchButton.disabled = true;
-    searchButton.classList.add('disabled');
-    navigationButton.disabled = true;
-    navigationButton.classList.add('disabled');
+    searchInput.disabled = disabled
+    searchInput.placeholder = disabled ? 'Processing...' : 'Search Location...'
 
-    let location_API = ''
-
-    if (button.id === 'search-button') {
-        const formData = new FormData(form);
-        location_API = `http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=${formData.get('location')}&days=14`
+    if (disabled) {
+        searchInput.value = ''
     }
-
-    if (button.id === 'navigation-button') {
-        location_API = 'http://api.weatherapi.com/v1/forecast.json?key=357b0f1c8fdb446a869135515261605&q=auto:ip&days=14'
-    }
-
-    inputElement.disabled = true
-    inputElement.value = "";
-    inputElement.placeholder = "Processing...";
-
-    requestFetch(location_API, searchButton, navigationButton, inputElement)
 }
 
-function requestFetch(location_API, searchButton, navigationButton, inputElement) {
-    fetch(location_API)
-        .then(response => {
+function showWeatherCard(show) {
+    const meetingElement = document.querySelector('.meeting')
+    const weatherCard = document.getElementById('main__card')
+    const extraCard = document.querySelector('.main__card--extra')
+
+    meetingElement.style.display = show ? 'none' : ''
+    weatherCard.style.display = show ? 'flex' : 'none'
+    extraCard.style.display = 'none'
+}
+
+
+
+function fetchWeather(url) {
+    setControlsDisabled(true)
+
+    fetch(url)
+        .then((response) => {
             if (!response.ok) {
-                throw new CustomError('Location not found!');
+                throw new Error('Location not found!')
             }
-            return response.json();
+            return response.json()
         })
-        .then(data => {
-            const mainCard = document.querySelector('.main__card')
-            const meetingElement = document.querySelector('.meeting')
-
-            meetingElement.style.display = 'none'
-            mainCard.style.display = 'flex'
-
+        .then((data) => {
             console.log(data)
-            setLocation(data)
-            setTime(data)
-            setDescription(data)
-            setForecast(data)
-            setSupportingInformation(data)
-            setIcon(data)
-        })
-        .catch(error => {
-            if (error instanceof CustomError) {
-                error.showErrorModal('Location not found!', 1500);
-            } else {
-                console.error('Системная ошибка:', error);
 
-                const genericError = new CustomError();
-                genericError.showErrorModal('Произошла ошибка при загрузке данных!', 1500);
+            renderLocation(data)
+            renderClock(data)
+            renderDescription(data)
+            renderForecast(data)
+            renderSupportingInformation(data)
+            renderWeatherIcon(data)
+            initForecastDayClick(data)
+            initForecastHourClick(data)
+
+            showWeatherCard(true)
+        })
+        .catch((error) => {
+            const message = error.message === 'Location not found!'
+                ? 'Location not found!'
+                : 'Произошла ошибка при загрузке данных!'
+
+            if (message !== 'Location not found!') {
+                console.log('Системная ошибка:', error)
             }
+
+            errorPopup.showErrorModal(message, 1500)
         })
         .finally(() => {
-            const mainCard = document.querySelector("#main__card")
-            const mainCardExtra = document.querySelector(".main__card--extra")
-
-            mainCard.style.display = 'flex'
-            mainCardExtra.style.display = 'none'
-
-            searchButton.disabled = false;
-            searchButton.classList.remove('disabled');
-            navigationButton.disabled = false;
-            navigationButton.classList.remove('disabled');
-            inputElement.disabled = false;
-            inputElement.placeholder = "Search Location..."
-            inputElement.value = ""
+            setControlsDisabled(false)
         })
 }
 
-export {request, requestFetch}
+export {fetchWeather}

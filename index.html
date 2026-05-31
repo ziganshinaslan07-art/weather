@@ -5,18 +5,27 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="./src/main.js" defer type="module"></script>
     <title>Weather Web</title>
+    <script src="./src/main.js" type="module"></script>
 </head>
 <body>
+
     <div class="error-popup">
         <div class="error-popup-message"></div>
     </div>
+
     <header class="header">
         <form class="header__container">
             <label for="search" class="visually-hidden">Search</label>
-            <input name="location" type="text" class="header__search" id="search" placeholder="Search Location...">
-            <button type="button" id="search-button" title="Search">
+            <input
+                    name="location"
+                    type="text"
+                    class="header__search"
+                    id="search"
+                    placeholder="Search Location..."
+            >
+
+            <button class="button button-search" type="button" id="search-button" title="Search">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_129_5344)">
                         <path d="M19.3846 11.8462C19.3846 9.77083 18.647 7.99559 17.1719 6.52043C15.6967 5.04527 13.9215 4.30769 11.8462 4.30769C9.77083 4.30769 7.99559 5.04527 6.52043 6.52043C5.04527 7.99559 4.30769 9.77083 4.30769 11.8462C4.30769 13.9215 5.04527 15.6967 6.52043 17.1719C7.99559 18.647 9.77083 19.3846 11.8462 19.3846C13.9215 19.3846 15.6967 18.647 17.1719 17.1719C18.647 15.6967 19.3846 13.9215 19.3846 11.8462ZM28 25.8462C28 26.4295 27.7869 26.9343 27.3606 27.3606C26.9343 27.7869 26.4295 28 25.8462 28C25.2404 28 24.7356 27.7869 24.3317 27.3606L18.5601 21.6058C16.5521 22.9968 14.3141 23.6923 11.8462 23.6923C10.242 23.6923 8.70793 23.381 7.24399 22.7584C5.78005 22.1358 4.51803 21.2945 3.45793 20.2344C2.39784 19.1743 1.55649 17.9123 0.933894 16.4483C0.311298 14.9844 0 13.4503 0 11.8462C0 10.242 0.311298 8.70793 0.933894 7.24399C1.55649 5.78005 2.39784 4.51803 3.45793 3.45793C4.51803 2.39784 5.78005 1.55649 7.24399 0.933894C8.70793 0.311298 10.242 0 11.8462 0C13.4503 0 14.9844 0.311298 16.4483 0.933894C17.9123 1.55649 19.1743 2.39784 20.2344 3.45793C21.2945 4.51803 22.1358 5.78005 22.7584 7.24399C23.381 8.70793 23.6923 10.242 23.6923 11.8462C23.6923 14.3141 22.9968 16.5521 21.6058 18.5601L27.3774 24.3317C27.7925 24.7468 28 25.2516 28 25.8462Z" fill="white"/>
@@ -28,7 +37,8 @@
                     </defs>
                 </svg>
             </button>
-            <button type="button" id="navigation-button" title="Current Location">
+
+            <button class="button button-search" type="button" id="navigation-button" title="Current Location">
                 <svg fill="#FFFFFF" version="1.0" xmlns="http://www.w3.org/2000/svg"
                      width="30" height="30" viewBox="0 0 930.000000 1280.000000"
                      preserveAspectRatio="xMidYMid meet">
@@ -46,95 +56,71 @@
                     </g>
                 </svg>
             </button>
+
+            <div class="dropdown">
+                <button class="button button-search" type="button" id="settings-button" title="Settings">
+                    <svg fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="30px" height="30px"><path d="M47.16,21.221l-5.91-0.966c-0.346-1.186-0.819-2.326-1.411-3.405l3.45-4.917c0.279-0.397,0.231-0.938-0.112-1.282l-3.889-3.887c-0.347-0.346-0.893-0.391-1.291-0.104l-4.843,3.481c-1.089-0.602-2.239-1.08-3.432-1.427l-1.031-5.886C28.607,2.35,28.192,2,27.706,2h-5.5c-0.49,0-0.908,0.355-0.987,0.839l-0.956,5.854c-1.2,0.345-2.352,0.818-3.437,1.412l-4.83-3.45c-0.399-0.285-0.942-0.239-1.289,0.106L6.82,10.648c-0.343,0.343-0.391,0.883-0.112,1.28l3.399,4.863c-0.605,1.095-1.087,2.254-1.438,3.46l-5.831,0.971c-0.482,0.08-0.836,0.498-0.836,0.986v5.5c0,0.485,0.348,0.9,0.825,0.985l5.831,1.034c0.349,1.203,0.831,2.362,1.438,3.46l-3.441,4.813c-0.284,0.397-0.239,0.942,0.106,1.289l3.888,3.891c0.343,0.343,0.884,0.391,1.281,0.112l4.87-3.411c1.093,0.601,2.248,1.078,3.445,1.424l0.976,5.861C21.3,47.647,21.717,48,22.206,48h5.5c0.485,0,0.9-0.348,0.984-0.825l1.045-5.89c1.199-0.353,2.348-0.833,3.43-1.435l4.905,3.441c0.398,0.281,0.938,0.232,1.282-0.111l3.888-3.891c0.346-0.347,0.391-0.894,0.104-1.292l-3.498-4.857c0.593-1.08,1.064-2.222,1.407-3.408l5.918-1.039c0.479-0.084,0.827-0.5,0.827-0.985v-5.5C47.999,21.718,47.644,21.3,47.16,21.221z M25,32c-3.866,0-7-3.134-7-7c0-3.866,3.134-7,7-7s7,3.134,7,7C32,28.866,28.866,32,25,32z"/></svg>
+                </button>
+
+                <div class="dropdown__menu" id="dropdown-menu">
+                    <p><b>Theme</b></p>
+                    <ul class="dropdown__menu-list">
+                        <li>
+                            <button class="button" type="button" id="theme-default-button">
+                                Default
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button" type="button" id="theme-forest-button">
+                                Forest
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button" type="button" id="theme-sakura-button">
+                                Sakura
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button" type="button" id="theme-orange-button">
+                                Orange
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button" type="button" id="theme-ocean-button">
+                                Ocean
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </form>
     </header>
+
     <main class="main">
+
         <div class="meeting">
             Enter a location...
         </div>
-        <div class="main__card" id="main__card" style="display: none">
-            <div class="card__location">
 
-            </div>
+        <div class="main__card" id="main__card" style="display: none">
+            <header class="card__location">
+
+            </header>
+
             <div class="card__time">
             </div>
+
             <div class="card__icon-container">
             </div>
+
             <div class="card__description">
-                Enter a location...
+
             </div>
-            <ul class="card__forecast">
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-1">
 
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-2">
+            <ul class="card__forecast" id="cardDays">
 
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-3">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-4">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-5">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-6">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-7">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-8">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-9">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-10">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-11">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-12">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-13">
-
-                    </button>
-                </li>
-                <li>
-                    <button class="minicard minicard--forecast card__forecast-14">
-
-                    </button>
-                </li>
             </ul>
+
             <div class="card__supporting-information">
                 <div class="minicard card__supporting-information-wind">
 
@@ -147,9 +133,38 @@
                 </div>
             </div>
         </div>
-        <div class="main__card main__card--extra" style="display: none">
+        <div class="main__card main__card--extra extra" style="display: none">
+            <header class="extra__header">
+                <button class="extra__header-leave button">
+                    <svg width="32" height="32" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11 8l1.415-1.414 4.95-4.95 1.414 1.414L6.94 8l4.95 4.95-1.414 1.414-4.95-4.95L4.111 8z" fill="#000"></path>
+                    </svg>
+                </button>
+                <div class="extra__header-date">
+                </div>
+            </header>
+            <ul class="extra__hours card__forecast" id="cardHours">
 
+            </ul>
+            <div class="extra__description">
+
+            </div>
+            <div class="extra__information information">
+
+            </div>
+            <div class="extra__wind">
+                <div class="wind-direction">Wind Direction:</div>
+                <div class="compass">
+                    <div class="compass__needle"></div>
+                    <div class="compass__degree"></div>
+                    <div class="direction north">N</div>
+                    <div class="direction south">S</div>
+                    <div class="direction east">E</div>
+                    <div class="direction west">W</div>
+                </div>
+            </div>
         </div>
     </main>
+
 </body>
 </html>

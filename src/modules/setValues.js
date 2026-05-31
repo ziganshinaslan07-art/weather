@@ -1,20 +1,18 @@
-function setLocation(data) {
-    const cardLocation = document.querySelector('.card__location');
+import { setAnimation } from './animation.js'
 
-    cardLocation.textContent = `
-        ${data.location.name}, ${data.location.country}
-    `
+function renderLocation(data) {
+    const { name, country } = data.location
+
+    document.querySelector('.card__location').textContent = `${name}, ${country}`;
 }
 
-let weatherTimeInterval = null
+let clockInterval = null
 
-function setTime(data) {
+function renderClock(data) {
     const cardTime = document.querySelector('.card__time');
     const timeZone = data.location.tz_id
 
-    if (weatherTimeInterval) {
-        clearInterval(weatherTimeInterval);
-    }
+    clearInterval(clockInterval);
 
     function updateTime() {
         const now = new Date()
@@ -36,109 +34,96 @@ function setTime(data) {
         `
     }
 
-    weatherTimeInterval = setInterval(updateTime, 30000);
+    clockInterval = setInterval(updateTime, 30000);
 
     updateTime()
 }
 
-function setIcon(data) {
-    const iconContainer = document. querySelector('.card__icon-container');
-    const textIcon = data.current.condition.code;
-    const textAPI = data.current.condition.text
-    let link = (data.current.is_day) ? `./icons/day/${textIcon}.svg` : `./icons/night/${textIcon}.svg`
-
-    iconContainer.innerHTML = `
+function renderWeatherIcon(data) {
+    const { is_day, condition } = data.current
+    const folder = is_day ? 'day' : 'night'
+    const iconPath = `./icons/${folder}/${condition.code}.svg`
+    document.querySelector('.card__icon-container').innerHTML = `
         <img
-            src="${link}"
-            alt="${textIcon}"
-            title="${textAPI}"
+            src="${iconPath}"
+            alt="${condition.code}"
+            title="${condition.text}"
             width="200"
             height="200"
         >
-    `
+    `;
 }
 
-function setDescription(data) {
-    const cardDescription = document.querySelector('.card__description');
-    const textAPI = data.current.condition.text
-    const text = ((textAPI === 'Sunny' || textAPI === 'Clear') && data.current.is_day === 0)
-        ? `Clear`
-        : textAPI
-    const dateAPI = data.current.last_updated.slice(0, 10);
-    const date = new Date(`${dateAPI}T12:00:00`);
+function renderDescription(data) {
+    const { condition, temp_c, last_updated, is_day } = data.current
 
-    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const weatherText = (condition.text === 'Sunny' || condition.text === 'Clear') && is_day === 0
+        ? 'Clear'
+        : condition.text
 
-    cardDescription.innerHTML = `
-        <div class="card__description-weather">${text}</div>
-        <div class="card__description-degree">${data.current.temp_c} <sup>°</sup>C</div>
-        <div class="card__description-day">${dayName}</div>
+    const date = last_updated.slice(0, 10)
+    const weekday = new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'long' });
+
+    document.querySelector('.card__description').innerHTML = `
+        <div class="card__description-weather">${weatherText}</div>
+        <div class="card__description-degree">${temp_c} <span>°</span>C</div>
+        <div class="card__description-day">${weekday}</div>
     `
+
+    setAnimation('card__description-weather', 'appearence-left')
+    setAnimation('card__description-degree', 'appearence-right')
+    setAnimation('card__description-day', 'appearence-bottom')
 }
 
-function setForecast(data) {
-    const cardForecastList = document.querySelectorAll('.minicard--forecast');
-    const currentElement = document.querySelector('.current')
-    if (currentElement) {
-        currentElement.classList.remove('current')
-    }
+function renderForecast(data) {
+    const forecastCards = document.querySelectorAll('.minicard--forecast-day');
 
-    cardForecastList[0].classList.add('current');
+    document.querySelector('.current-day')?.classList.remove('current-day');
 
-    for (let i = 0; i < cardForecastList.length; i++) {
-        const day = data.forecast.forecastday[i];
-        const dateAPI = day.date;
+    forecastCards.forEach((card, index) => {
+        const day = data.forecast.forecastday[index];
+        const date = new Date(`${day.date}T12:00:00`);
+        const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+        const shortDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const iconPath = `./icons/day/${day.day.condition.code}.svg`;
 
-        const date = new Date(`${dateAPI}T12:00:00`);
-
-        const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-
-        const formattedDate = date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric'
-        });
-
-        const textIcon = day.day.condition.text;
-        const dayTemperature = day.day.avgtemp_c;
-        let link = `./icons/day/${day.day.condition.code}.svg`;
-
-        cardForecastList[i].innerHTML = `
-            <p class="card__forecast-${i+1}-name">${dayName},</p>
-            <p class="card__forecast-${i+1}-date">${formattedDate}</p>
-            <div class="card__forecast-icon card__forecast-${i+1}-icon">
+        card.innerHTML = `
+            <p class="card__forecast-${index + 1}-name">${weekday},</p>
+            <p class="card__forecast-${index + 1}-date">${shortDate}</p>
+            <div class="card__forecast-icon card__forecast-${index + 1}-icon">
                 <img
-                    src="${link}"
-                    alt="${textIcon}"
-                    title="${textIcon}"
+                    src="${iconPath}"
+                    alt="${day.day.condition.text}"
+                    title="${day.day.condition.text}"
                     width="60"
                     height="60"
                 >
             </div>
-            <p class="card__forecast-${i+1}-degree">${dayTemperature} <sup>°</sup>C</p>
+            <p class="card__forecast-${index + 1}-degree">${day.day.mintemp_c} / ${day.day.maxtemp_c} <span>°</span>C</p>
         `;
-    }
+    })
 }
 
-function setSupportingInformation(data) {
-    const supportingInformation = document.querySelector('.card__supporting-information');
+function renderSupportingInformation(data) {
+    const { wind_kph, feelslike_c, humidity } = data.current
 
-    supportingInformation.innerHTML = `
+    document.querySelector('.card__supporting-information').innerHTML = `
         <div class="minicard card__supporting-information-wind">
-            <p class="card__supporting-information-wind-value">${data.current.wind_kph} kph</p>
+            <p class="card__supporting-information-wind-value">${wind_kph} kph</p>
             <p>Wind</p>
         </div>
         <div class="minicard card__supporting-information-feels-like">
-            <p class="card__supporting-information-feels-like-value">${data.current.feelslike_c} <sup>°</sup>C</p>
+            <p class="card__supporting-information-feels-like-value">${feelslike_c} <span>°</span>C</p>
             <p>Feels Like</p>
         </div>
         <div class="minicard card__supporting-information-humidity">
-            <p class="card__supporting-information-humidity-value">${data.current.humidity}%</p>
+            <p class="card__supporting-information-humidity-value">${humidity}%</p>
             <p>Humidity</p>
         </div>
     `
 }
 
-export {setLocation, setTime, setDescription, setForecast, setSupportingInformation, setIcon}
+export {renderLocation, renderClock, renderDescription, renderForecast, renderSupportingInformation, renderWeatherIcon}
 
 
 

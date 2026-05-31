@@ -1,0 +1,32 @@
+@use 'utils' as *;
+
+.dropdown {
+  @include flex-center;
+  text-align: center;
+  position: relative;
+  flex-direction: column;
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: rem(-20);
+    margin-top: rem(10);
+    padding-block: rem(10);
+    padding-inline: rem(20);
+    background-color: var(--color-dark-alternate);
+    border-radius: rem(10);
+    box-shadow: 0 0 rem(5) rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    display: none;
+
+    &-list {
+      list-style: none;
+      font-family: josefin-sans, sans-serif;
+      margin-top: rem(-10);
+    }
+
+    &.show {
+      display: block;
+    }
+  }
+}

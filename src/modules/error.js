@@ -1,7 +1,7 @@
-export class CustomError extends Error {
-    hideTimer
+class ErrorPopup extends Error {
+    #hideTimer
 
-    showErrorModal(message, duration) {
+    showErrorModal(message, duration = 1500) {
 
         const popup = document.querySelector('.error-popup')
         const messageElement = document.querySelector('.error-popup-message')
@@ -9,15 +9,15 @@ export class CustomError extends Error {
         messageElement.textContent = message
         popup.classList.add('active')
 
-        clearTimeout(this.hideTimer)
+        clearTimeout(this.#hideTimer)
 
-        this.hideTimer = setTimeout(this.closeModal, duration);
+        this.#hideTimer = setTimeout(this.closeModal, duration);
     }
 
     closeModal() {
-        const popup = document.querySelector('.error-popup')
-        popup.classList.remove('active')
-
-        clearTimeout(this.hideTimer)
+        document.querySelector('.error-popup').classList.remove('active')
+        clearTimeout(this.#hideTimer)
     }
 }
+
+export const errorPopup = new ErrorPopup();

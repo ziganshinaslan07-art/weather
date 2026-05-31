@@ -2,7 +2,7 @@
 
 .header {
   @include flex-center;
-  background-color: transparent;
+  background-color: var(--color-dark-alternate);
   box-shadow: 0 rem(10) rem(10) #000;
   padding-block: 15px;
   margin-bottom: rem(15);
@@ -26,8 +26,6 @@
       outline: none;
     }
   }
-
-
 }
 
 .disabled {

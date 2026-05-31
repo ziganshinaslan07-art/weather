@@ -1,16 +1,20 @@
 @use 'utils' as *;
 
-@media (max-width: 575px), (max-height: 950px) {
+@media (max-width: 625px), (max-height: 950px) {
   .meeting {
     font-size: rem(30)
   }
 
   .header {
     margin-bottom: 0;
-  }
 
-  .header__container {
-    margin-inline: rem(15);
+    &__container {
+      margin-inline: rem(15);
+    }
+
+    &__search::placeholder {
+      color: var(--color-white);
+    }
   }
 
   .main__card {
@@ -23,5 +27,29 @@
 
   .card__time {
     margin-bottom: rem(40);
+  }
+
+  .extra__wind {
+    margin-block: rem(15);
+  }
+
+  .dropdown__menu {
+    left: rem(-60);
+  }
+
+  :root[data-theme="forest"] {
+    --color-dark-alternate: #456c35;
+  }
+
+  :root[data-theme="sakura"] {
+    --color-dark-alternate: #bd787d;
+  }
+
+  :root[data-theme="orange"] {
+    --color-dark-alternate: #cc883e;
+  }
+
+  :root[data-theme="ocean"] {
+    --color-dark-alternate: #094d74;
   }
 }

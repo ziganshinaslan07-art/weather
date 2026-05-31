@@ -1,19 +1,16 @@
 import './styles/styles.css';
 
-import {scroll} from './modules/scroll.js'
-import {request} from './modules/request.js';
-import {searchEnter} from './modules/searchEnter.js';
-import {setExtra} from './modules/extra.js'
+import {createForecastElements} from './modules/createElements'
+import {initForecastScroll} from "./modules/scroll";
+import {initSearch} from "./modules/search";
+import {initLeave, initForecastHourClick} from "./modules/extra";
+import {initDropDown} from "./modules/dropdownThemes";
 
-scroll()
-
-searchEnter()
-
-setExtra()
-
-const form = document.querySelector('.header__container');
-
-form.addEventListener('click', (event) => {
-    request(event, form)
-})
+initDropDown()
+createForecastElements('card__forecast', 14, 'day');
+createForecastElements('extra__hours', 24, 'hour')
+initForecastHourClick()
+initForecastScroll();
+initSearch()
+initLeave()
 

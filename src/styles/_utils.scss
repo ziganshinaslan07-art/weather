@@ -1,13 +1,5 @@
 @use 'sass:math';
 
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../fonts/Roboto-Regular.woff2');
-  font-display: swap;
-}
-
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -36,30 +28,56 @@
 }
 
 .minicard {
-  width: rem(85);
+  width: rem(95);
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
   align-items: center;
 
-  &--forecast {
+  &--forecast-day {
     padding-block: rem(7);
     line-height: 1.35;
   }
 }
 
-button {
+.button {
+  @include flex-center;
   background-color: transparent;
   cursor: default;
   border: none;
   color: var(--color-white);
-  @include flex-center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &.show {
+    transform: scale(1.05) translateY(rem(-3));
+    color: var(--color-light-gray);
+  }
 
   &:hover {
-    color: var(--color-light-gray)
+    color: var(--color-light-gray);
+    transform: scale(1.05) translateY(rem(-3));
+  }
+
+  &-forecast {
+    background-color: var(--black-opacity);
+
+    &:hover {
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+      transform: scaleY(1.07) translateY(rem(-3));
+    }
   }
 }
 
-.current {
-  background-color: var(--black-opacity);
+span {
+  line-height: 0;
+  vertical-align: super;
+}
+
+p {
+  font-family: var(--font-family-base), sans-serif;
+}
+
+.current-hour {
+  background-color: var(--blackX2-opacity);
+  transform: scaleY(1.07) translateY(rem(-3));
 }

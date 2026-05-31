@@ -13,7 +13,8 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: var(--grey-gradient);
+    background: var(--theme-gradient);
+    overflow: hidden;
   }
 }
 
@@ -34,6 +35,7 @@
 .card__icon-container {
   margin-bottom: rem(30);
   width: rem(200);
+
 }
 
 .card__description {
@@ -42,22 +44,30 @@
   align-items: center;
   line-height: 1;
   margin-bottom: rem(40);
+  animation: var(--animation);
 
   &-weather {
     font-size: rem(50);
     margin-bottom: rem(10);
     text-wrap: wrap;
     text-align: center;
+    animation-delay: 0.5s;
   }
 
   &-degree {
     font-size: rem(40);
     margin-bottom: rem(15);
+    line-height: 1;
+    animation-delay: 0.5s;
+  }
+
+  &-day {
+    animation-delay: 0.5s;
   }
 }
 
 .card__forecast {
-  background-color: var(--black-opacity);
+  background-color: transparent;
   font-size: rem(14);
   display: flex;
   overflow-x: scroll;
@@ -67,12 +77,19 @@
   flex-shrink: 0;
   row-gap: rem(10);
   scroll-behavior: smooth;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  padding-top: rem(10);
+  overflow-y: hidden;
 
   &::-webkit-scrollbar {
-    display: none;
+    height: rem(10);
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--blackX2-opacity);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--black-opacity);
+    border-radius: rem(5);
+    border: 2px solid var(--black-opacity);
   }
 
   &-icon {

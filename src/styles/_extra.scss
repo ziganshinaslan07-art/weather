@@ -1,0 +1,109 @@
+@use 'utils' as *;
+
+
+.extra__header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: rem(45);
+
+  &-leave {
+    position: absolute;
+    left: 0;
+    padding-block: rem(10);
+    margin: rem(10) 0 0 rem(10);
+  }
+
+  &-date {
+    padding-block: rem(10);
+    padding-inline: rem(30);
+    background-color: var(--black-opacity);
+    border-radius: 0 0 rem(15) rem(15);
+    line-height: 1.25;
+  }
+}
+
+.extra__hours {
+  margin-top: 0;
+  margin-bottom: rem(25);
+}
+
+.extra__description {
+  text-align: center;
+  margin-bottom: rem(25);
+  font-size: rem(25);
+  text-wrap: wrap;
+  line-height: 1.25;
+}
+
+.extra__information {
+  padding-top: rem(15);
+  text-align: center;
+  width: 100%;
+  padding-inline: rem(20);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: rem(18);
+  background-color: var(--black-opacity);
+  margin-bottom: rem(20);
+}
+
+.information__card p {
+  margin-bottom: rem(7);
+  line-height: 1.25;
+}
+
+.extra__wind {
+  @include flex-center;
+  column-gap: rem(35);
+  margin-block: rem(25);
+}
+
+.compass {
+  position: relative;
+  width: rem(180);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--color-dark-alternate);
+  background-color: #eeeeee;
+  color: var(--color-dark-alternate);
+
+  &__needle {
+    position: absolute;
+    transform-origin: bottom center;
+    bottom: 50%;
+    width: rem(5);
+    height: rem(80);
+    background: #b46464;
+    border-radius: 0 0 rem(4) rem(4);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    clip-path: polygon(
+      50% 0%,
+      100% 100%,
+      0% 100%,
+      50% 0%
+    );
+  }
+
+  &__degree {
+    position: relative;
+    top: rem(20);
+    font-size: rem(16);
+  }
+}
+
+.direction { position: absolute; font-weight: bold; }
+.north { top: rem(6); }
+.south { bottom: rem(6); }
+.east { right: rem(10); }
+.west { left: rem(10); }
+
+
+
+
