@@ -15,7 +15,6 @@ export function initForecastDayClick(data) {
 
         const dayIndex = Array.from(forecastCards).indexOf(clickedCard)
         currentDayIndex = dayIndex
-        console.log(dayIndex)
 
         mainCard.style.display = 'none'
         extraCard.style.display = 'flex'
@@ -47,7 +46,6 @@ export function initForecastHourClick(data) {
         if (!clickedCard) return
 
         const hourIndex = Array.from(forecastCards).indexOf(clickedCard)
-        console.log(hourIndex)
 
         forecastElementHour.querySelector('.current-hour').classList.remove('current-hour')
         clickedCard.classList.add('current-hour')
@@ -100,8 +98,8 @@ function renderForecastHour(data, dayIndex) {
         const time = hour.time.slice(10, 16)
 
         card.innerHTML = `
-            <p class="card__forecast-${index}-time">${time}</p>
-            <div class="card__forecast-icon card__forecast-${index}-icon">
+            <p class="card__forecast-time">${time}</p>
+            <div class="card__forecast-icon card__forecast-icon">
                 <img
                     src="${iconPath}"
                     alt="${hour.condition.text}"
@@ -110,7 +108,7 @@ function renderForecastHour(data, dayIndex) {
                     height="60"
                 >
             </div>
-            <p class="card__forecast-${index}-degree">${hour.temp_c} <span>°</span>C</p>
+            <p class="card__forecast-degree">${hour.temp_c} <span>°</span>C</p>
         `;
     })
 }

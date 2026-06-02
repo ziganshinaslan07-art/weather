@@ -1,39 +1,42 @@
 const root = document.documentElement
 
 export function initDropDown() {
+    setupDropdownToggle();
+    setupThemeSwitcher();
+}
+
+function setupDropdownToggle() {
     const settingsButton = document.getElementById('settings-button');
     const dropdownMenu = document.getElementById('dropdown-menu');
+
+    if (!settingsButton || !dropdownMenu) return;
 
     settingsButton.addEventListener('click', (event) => {
         event.stopPropagation();
         settingsButton.classList.toggle('show');
         dropdownMenu.classList.toggle('show');
-    })
+    });
 
     document.addEventListener('click', () => {
         if (dropdownMenu.classList.contains('show')) {
             settingsButton.classList.remove('show');
             dropdownMenu.classList.remove('show');
         }
-    })
+    });
+}
 
-    const defaultButton = document.getElementById('theme-default-button');
-    const forestButton = document.getElementById('theme-forest-button');
-    const sakuraButton = document.getElementById('theme-sakura-button');
-    const orangeButton = document.getElementById('theme-orange-button');
-    const oceanButton = document.getElementById('theme-ocean-button');
+function setupThemeSwitcher() {
+    const themeContainer = document.querySelector('.dropdown__menu-list'); // Контейнер для кнопок тем
 
     const savedTheme = localStorage.getItem('selected-theme');
-    if (savedTheme) {
-        setTheme(savedTheme)
-    }
+    if (savedTheme) setTheme(savedTheme);
 
-    defaultButton.addEventListener('click', () => setTheme('default'))
-    forestButton.addEventListener('click', () => setTheme('forest'))
-    sakuraButton.addEventListener('click', () => setTheme('sakura'))
-    orangeButton.addEventListener('click', () => setTheme('orange'))
-    oceanButton.addEventListener('click', () => setTheme('ocean'))
-
+    themeContainer?.addEventListener('click', (event) => {
+        const target = event.target.closest('[data-theme-name]');
+        if (target) {
+            setTheme(target.dataset.themeName);
+        }
+    });
 }
 
 function setTheme(themeName) {

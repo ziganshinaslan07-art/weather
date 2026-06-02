@@ -16,34 +16,31 @@ body {
 
   --font-family-base: josefin-sans, sans-serif;
 
-  --theme-gradient: linear-gradient(#acc38b, #778f51, #456c35);
+  --theme-gradient: #282e33;
 
   --black-opacity: rgba(0, 0, 0, 0.1);
   --blackX2-opacity: rgba(0, 0, 0, 0.2);
+
+  --color-dark-alternate: #131619;
 }
 
 :root[data-theme="default"] {
-  --theme-gradient: #282e33;
-  --color-dark-alternate: #131619;
+  --theme-gradient: linear-gradient(#3c4449, #2d3033);
 }
 
 :root[data-theme="forest"] {
   --theme-gradient: linear-gradient(#acc38b 0%, #778f51 40%, #456c35 100%);
-  --color-dark-alternate: #131619;
 }
 
 :root[data-theme="sakura"] {
   --theme-gradient: linear-gradient(#d7c1d5 0%, #e0acbe 40%, #bd787d 100%);
-  --color-dark-alternate: #131619;
 }
 
 :root[data-theme="orange"] {
   --theme-gradient: linear-gradient(#a5c6b1 0%, #f4c88c 85%, #cc883e 100%);
-  --color-dark-alternate: #131619;
 }
 
 :root[data-theme="ocean"] {
   --theme-gradient: linear-gradient(#9cb9d1 0%, #759cd8 55%, #094d74 100%);
-  --color-dark-alternate: #131619;
 }
 

@@ -43,8 +43,6 @@ function fetchWeather(url) {
             return response.json()
         })
         .then((data) => {
-            console.log(data)
-
             renderLocation(data)
             renderClock(data)
             renderDescription(data)
