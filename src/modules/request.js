@@ -1,6 +1,7 @@
 import {errorPopup} from "./error.js";
 import {renderLocation, renderClock, renderDescription, renderForecast, renderSupportingInformation, renderWeatherIcon} from "./setValues.js";
 import { initForecastDayClick, initForecastHourClick } from "./extra.js"
+import {animation} from "./animation";
 
 function setControlsDisabled(disabled) {
     const searchButton = document.getElementById('search-button')
@@ -53,6 +54,8 @@ function fetchWeather(url) {
             initForecastHourClick(data)
 
             showWeatherCard(true)
+            animation()
+
         })
         .catch((error) => {
             const message = error.message === 'Location not found!'

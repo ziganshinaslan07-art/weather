@@ -1,5 +1,4 @@
 import {fetchWeather} from "./request.js";
-import {animation} from "./animation.js";
 
 const API_KEY = '01890537221a47ba8c8195027262405';
 const API_BASE = 'https://api.weatherapi.com/v1/forecast.json';
@@ -25,7 +24,6 @@ export function initSearch() {
             behavior: 'smooth'
         });
 
-        animation()
     })
 
     headerForm.addEventListener('click', (event) => {
@@ -45,7 +43,6 @@ export function initSearch() {
             behavior: 'smooth'
         });
 
-        animation()
     })
 }
 

@@ -13,6 +13,11 @@
     left: 0;
     padding-block: rem(10);
     margin: rem(10) 0 0 rem(10);
+    color: var(--color-text);
+
+    &:hover {
+      color: var(--color-hover);
+    }
   }
 
   &-date {
@@ -69,9 +74,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid var(--color-dark-alternate);
+  border: 3px solid #000000;
   background-color: #eeeeee;
-  color: var(--color-dark-alternate);
+  color: #000000;
 
   &__needle {
     position: absolute;

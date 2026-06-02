@@ -5,14 +5,16 @@ body {
   font-size: 18px;
   font-weight: 400;
   line-height: 1.75;
-  color: var(--color-white);
   background-image: url('/public/background/pattern.svg');
   white-space: nowrap;
+  color: var(--color-text)
 }
 
 :root {
-  --color-white: #ffffff;
-  --color-light-gray: #d7d7d7;
+  --color-text: #ffffff;
+  --color-header-text: #ffffff;
+  --color-hover: #d7d7d7;
+  --color-header-hover: #d7d7d7;
 
   --font-family-base: josefin-sans, sans-serif;
 
@@ -26,6 +28,12 @@ body {
 
 :root[data-theme="default"] {
   --theme-gradient: linear-gradient(#3c4449, #2d3033);
+}
+
+:root[data-theme="light"] {
+  --theme-gradient: linear-gradient(#ffffff, #e5e5e5);
+  --color-text: #000000;
+  --color-hover: #424242;
 }
 
 :root[data-theme="forest"] {

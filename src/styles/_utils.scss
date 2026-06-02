@@ -45,28 +45,30 @@
   background-color: transparent;
   cursor: default;
   border: none;
-  color: var(--color-white);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: var(--color-header-text);
 
   &.show {
     transform: scale(1.05) translateY(rem(-3));
-    color: var(--color-light-gray);
+    color: var(--color-header-hover);
   }
 
   @media (hover: hover) {
     &:hover {
-      color: var(--color-light-gray);
+      color: var(--color-header-hover);
       transform: scale(1.05) translateY(rem(-3));
     }
   }
 
   &-forecast {
     background-color: var(--black-opacity);
+    color: var(--color-text);
 
     @media (hover: hover) {
       &:hover {
         box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
         transform: scaleY(1.07) translateY(rem(-3));
+        color: var(--color-hover);
       }
     }
   }

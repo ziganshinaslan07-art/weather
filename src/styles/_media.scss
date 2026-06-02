@@ -13,7 +13,7 @@
     }
 
     &__search::placeholder {
-      color: var(--color-white);
+      color: var(--color-header-text);
     }
   }
 
@@ -35,6 +35,12 @@
 
   .dropdown__menu {
     left: rem(-60);
+  }
+
+  :root[data-theme="light"] {
+    --color-dark-alternate: #c5c5c5;
+    --color-header-text: #000000;
+    --color-header-hover: #424242;
   }
 
   :root[data-theme="forest"] {
